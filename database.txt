@@ -1,0 +1,4 @@
+apple: 100
+banana: 80
+orenge: 150
+mongo: 60
