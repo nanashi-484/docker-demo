@@ -59,13 +59,13 @@ def get_fruit(fruit_name: str):
         raise HTTPException(status_code=404, detail=f"找不到水果: {fruit_name}")
     return {"fruit": fruit_name, "quantity": fruits[fruit_name]}
 
-@app.put("/fruits/{fruit_name}")
-def update_fruit(fruit_name: str, fruit_update: FruitUpdate):
+@app.get("/fruits/{fruit_name}/updates/{quantity}")
+def update_fruit(fruit_name: str, quantity: int):
     """更新特定水果的庫存"""
     fruits = read_database()
-    fruits[fruit_name] = fruit_update.quantity
+    fruits[fruit_name] = quantity
     write_database(fruits)
-    return {"message": f"{fruit_name} 庫存已更新", "fruit": fruit_name, "quantity": fruit_update.quantity}
+    return {"message": f"{fruit_name} 庫存已更新", "fruit": fruit_name, "quantity": quantity}
 
 @app.delete("/fruits/{fruit_name}")
 def delete_fruit(fruit_name: str):
